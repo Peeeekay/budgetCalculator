@@ -20,5 +20,4 @@ def db(request):
 
 def getData(request):
     bud = Budget.objects.all()
-    print(bud)
     return HttpResponse(bud)
