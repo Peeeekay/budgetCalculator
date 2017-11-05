@@ -6,7 +6,7 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-from secret import credentials
+from hello.scheduler.secret import credentials
 from pprint import pformat
 
 import base64
