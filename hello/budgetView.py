@@ -1,14 +1,14 @@
+from .models import Budget, Emails
 from django.shortcuts import render
 from django.views import generic
 from django.http.response import HttpResponse
-
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from .models import Budget
 
 import json
 import os
 import re
+
 import hello.scheduler.quickstart as quick
 
 def parseBudget(mes):
@@ -67,6 +67,5 @@ class BudgetView(generic.View):
                         print("not a vaild text")
                     else:
                         txt = mesg["text"]
-                        print(txt)
                         switchString(txt)
         return HttpResponse()

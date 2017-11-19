@@ -28,19 +28,14 @@ except ImportError:
 TOTAL_MONEY_SPENT = 0
 
 def searchForEmail(service, query):
-    total_money_spent = 0
-    responses = service.users().messages().list(userId='me', q=query).execute()
-    mesgs = responses['messages']
-    for mes in mesgs:
-        mesId = mes.get("id")
-        resp = service.users().messages().get(userId='me', id=mesId).execute()
-        messageStr = resp['snippet']
-        dollars= re.findall("[0-9]+",messageStr)
-        dollar = dollars[0]
-        money = int(dollar)
-        total_money_spent = money + total_money_spent
-
-    return total_money_spent
+    try:
+        total_money_spent = 0
+        responses = service.users().messages().list(userId='me', q=query).execute()
+        mesgs = responses['messages']
+        return len(mesgs)       
+    except Exception as e:
+        print(e)
+        return e
 
 def sendRequest(data, url, method):
     http = Http()
@@ -84,16 +79,24 @@ def askForBiWeeklyBudget():
     if currDate == msgDate:
         sendMessageOnFb("Whats your budget for these 2 weeks?")
 
-def main():
-    creden = credentials.getCredentials()
-    http = creden.authorize(Http())
-    service = discovery.build('gmail', 'v1', http=http)
 
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
+# def getInfo():
+#     for mes in mesgs:
+#             mesId = mes.get("id")
+#             resp = service.users().messages().get(userId='me', id=mesId).execute()
+#     messageStr = resp['snippet']
+#             dollars= re.findall("[0-9]+",messageStr)
+#             dollar = dollars[0]
+#             money = int(dollar)
+#             total_money_spent = money + total_money_spent
 
-    total_money_spent = searchForEmail(service, "subject:Large Transaction Warning")
-    print (total_money_spent)
 
-if __name__ == '__main__':
-    main()
+#         return total_money_spent
+
+# def main():
+#     creden = credentials.getCredentials()
+#     http = creden.authorize(Http())
+#     service = discovery.build('gmail', 'v1', http=http)
+
+#     results = service.users().labels().list(userId='me').execute()
+#     labels = results.get('labels', [])

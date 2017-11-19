@@ -12,3 +12,26 @@ conn = psycopg2.connect(
     host=url.hostname,
     port=url.port
 )
+
+
+def createTable():
+	command = (
+		"""
+			CREATE TABLE emails (
+				id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+				sender VARCHAR(20),
+				reciever VARCHAR(20),
+				expense INTEGER NOT NULL,
+				created_on TIMESTAMP NOT NULL
+			)
+		""")
+	conn.execute(command)
+
+def interstTable(email):
+	command = (
+		"""
+		INSERT INTO emails(expense, created_on, reciever, sender) 
+			VALUES (%(expense)s,%(created_on)s, %(reciever)s, %(sender)s)
+		""", 
+	email)
+	conn.execute(command)

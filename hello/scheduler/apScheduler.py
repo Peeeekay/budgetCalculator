@@ -1,12 +1,21 @@
+# from hello.models import Emails
+from django.db.models import F
+from hello.scheduler.secret import credentials
 from apscheduler.schedulers.background import BackgroundScheduler
-import quickstart
+
 import datetime
 
-def pollGmail(serivce):
-    query = 'subject:Large Transaction Warning'
-    emailIds = quickstart.totalEmails(service, query)
-    totalNumberEmails = emailIds
 
+# def pollGmail(serivce):
+#     query = 'subject:Large Transaction Warning'
+#     emailIds = quickstart.searchForEmail(service, query)
+#     totalNumberEmails = emailIds
+
+#     emails = Emails.objects.get(name="DEFAULT")
+#     if totalNumberEmails != emails.totalEmails:
+#         emails.totalEmails = F('totalEmails') + totalNumberEmails
+#         emails.save()
+#         requestForNewEmails()
 
 class Scheduler(object):
     def __init__(self):
@@ -24,14 +33,3 @@ class Scheduler(object):
     def start(self):
         self.backGroundTask.start()
 
-if __name__ =="__main__":
-    sch = Scheduler()
-    sch.start()
-    credentials=quickstart.get_credentials()
-    http = credentials.authorize(Http())
-    service = discovery.build('gmail', 'v1', http=http)
-
-    sch.add_job(pollGmail, 30, service)
-
-    while(True):
-        pass

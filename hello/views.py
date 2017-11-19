@@ -9,7 +9,6 @@ from .models import Greeting, Budget
 
 # Create your views here.
 def index(request):
-    # return HttpResponse('Hello from Python!')
     return render(request, 'index.html')
 
 def db(request):

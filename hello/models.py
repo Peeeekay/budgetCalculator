@@ -5,10 +5,12 @@ import uuid
 class Greeting(models.Model):
     when = models.DateTimeField('date created', auto_now_add=True)
 
-class Jobs(models.Model):
-    name = models.CharField(max_length=30)
-    id = models.UUIDField(default=uuid.uuid4,primary_key=True, editable=False)
+#important to keep track of new Emails
+class Emails(models.Model):
+	totalEmails = models.IntegerField()
+	name = "DEFAULT"
 
+#just stores the budget for 2 weeks.
 class Budget(models.Model):
     budget = models.IntegerField()
     month = models.CharField(max_length=15)
