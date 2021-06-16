@@ -35,6 +35,7 @@ $ heroku open
 ```
 or
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/efab859c303d4900a95a3bc2b58fe799)](https://app.codacy.com/gh/Peeeekay/budgetCalculator?utm_source=github.com&utm_medium=referral&utm_content=Peeeekay/budgetCalculator&utm_campaign=Badge_Grade_Settings)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## Documentation
